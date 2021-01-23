@@ -1,12 +1,19 @@
 import React, { useState } from 'react';
 
 import envs from '../config/env';
+import axiosInstance from '../helpers/AxiosInterceptor';
 import RegisterComponent from '../components/Signup';
+
 
 function Register() {
   const [form, setForm] = useState({});
   const [errors, setErrors] = useState({});
   const { BACKEND_URL } = envs;
+
+  React.useEffect(() => {
+    axiosInstance.get('/contacts')
+    .then(res => console.log(res))
+  }, [])
 
   const onChange = ({name, value}) => {
     setForm({...form, [name]: value});
